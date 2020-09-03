@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <h3 v-for="user in users" :key="user.id">
-      {{ user.name }} : {{ user.pnum }}
+    <h2>check</h2>
+    <h3 v-for="(user, index) in users" :key="user.id">
+      <router-link :to="{name:'DetailUser',params:{id: index}}">{{user.name}} : {{user.pnum}}</router-link>
     </h3>
   </div>
 </template>
@@ -14,14 +14,14 @@ export default {
   data() {
     return {
       msg: "first",
-      users: []
+      users: [],
     };
   },
   created() {
-    this.$http.get("/api/users").then(resp => {
+    this.$http.get("/api/users").then((resp) => {
       this.users = resp.data.response;
     });
-  }
+  },
 };
 </script>
 
